@@ -12,6 +12,12 @@ export function app(): express.Express {
   const browserDistFolder = resolve(serverDistFolder, '../browser');
   const indexHtml = join(serverDistFolder, 'index.server.html');
 
+  
+  const cors = require('cors');
+  server.use(cors({
+    origin:"https://localhost:7262/"
+  }));
+
   const commonEngine = new CommonEngine();
 
   server.set('view engine', 'html');
@@ -48,6 +54,11 @@ function run(): void {
 
   // Start up the Node server
   const server = app();
+
+  const cors = require('cors');
+  server.use(cors({
+    origin:"https://localhost:7262/"
+  }));
   server.listen(port, () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });

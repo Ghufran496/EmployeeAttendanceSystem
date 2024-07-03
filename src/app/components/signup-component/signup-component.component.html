@@ -1,0 +1,15 @@
+
+<form class="container" [formGroup]="loginForm">
+    <h4>Please SignUp</h4>
+    <input type="text" placeholder="name here" [formControl]="name" />
+    <h5 class="red-text" [hidden]="name.valid || name.untouched">Enter correct name</h5>
+    <input type="email" placeholder="email here" [formControl]="email" />
+    <h5 class="red-text" [hidden]="email.valid || email.untouched">Enter correct email</h5>
+    <input type="password" placeholder="password here" [formControl]="password" />
+    <h5 class="red-text" [hidden]="password.valid || password.untouched">password is required and must be greater then 6</h5>
+    <button class="btn-green" [disabled]="loginForm.invalid" (click)="signup()">Login</button>
+    <button class="btn-red" (click)="reset()">Reset</button>
+ </form>
+ 
+ 
+ 
