@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -11,8 +12,19 @@ import { CommonModule } from '@angular/common';
 })
 export class UserComponent {
   UsersData: any;
+  authenticatedUserId: any;
 
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService
+  ) {
+    this.authenticatedUserId = sessionStorage.getItem('authenticatedUserId');
+
+    if (this.authenticatedUserId === null) {
+      this.authenticatedUserId = this.authService.gettoken().id;
+      sessionStorage.setItem('authenticatedUserId', this.authenticatedUserId);
+    }
+  }
 
   ngOnInit() {
     this.getUsers();
@@ -22,7 +34,18 @@ export class UserComponent {
     this.userService.getAllUsers().subscribe(
       (data) => {
         this.UsersData = data;
-        console.log(data);
+
+        const authenticatedUser = this.UsersData.find(
+          (user: { id: string }) => user.id === this.authenticatedUserId
+        );
+
+        if (authenticatedUser) {
+          this.UsersData = [authenticatedUser];
+        } else {
+          this.UsersData = [];
+        }
+
+        console.log(this.UsersData);
       },
       (err) => {
         console.log('error', err);

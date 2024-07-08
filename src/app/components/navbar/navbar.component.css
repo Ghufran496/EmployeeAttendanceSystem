@@ -1,15 +1,37 @@
-/* Apply styles to the navigation bar */
-div {
-    margin: 10px;
+/* General styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
 }
 
+/* Container for the navbar */
+.navbar-container {
+    margin: 10px;
+    background: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Navigation bar styles */
 nav {
     display: flex;
-    padding: 10px;
+    align-items: center;
     justify-content: space-between;
-
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
 }
 
+/* Navigation heading styles */
+nav h2 a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Unordered list styles */
 ul {
     list-style: none;
     padding: 0;
@@ -18,19 +40,43 @@ ul {
     gap: 20px;
 }
 
-li:hover{
+/* List item styles */
+li {
+    position: relative;
+}
+
+li:hover {
     cursor: pointer;
 }
 
-.logout{
-    color: red;
+li.logout {
+    color: #ff4d4d;
     font-weight: 700;
 }
 
-a{
+/* Anchor tag styles */
+a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
+
+a:hover {
+    color: #d0d0d0;
+}
+
 ul li a.active {
     font-weight: 700;
+    border-bottom: 2px solid white;
+}
+
+/* Additional hover effect for admin links */
+ul li a:hover {
+    border-bottom: 2px solid #ffde59;
+}
+
+/* Divider styles */
+hr {
+    border: 0;
+    border-top: 1px solid #e0e0e0;
+    margin: 0;
 }

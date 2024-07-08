@@ -5,6 +5,8 @@ import { UserComponent } from './components/user/user.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { authGuard } from './guard/auth.guard';
 import { restrictGuard } from './guard/restrict.guard';
+import { UsersSalariesComponent } from './components/users-salaries/users-salaries.component';
+import { UsersAttendancesComponent } from './components/users-attendances/users-attendances.component';
 
 export const routes: Routes = [
   {
@@ -18,5 +20,9 @@ export const routes: Routes = [
     canActivate: [restrictGuard],
   },
   { path: 'user', component: UserComponent, canActivate: [authGuard] },
+
+
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
+  { path: 'usersSalaries', component: UsersSalariesComponent, canActivate: [authGuard] },
+  { path: 'usersAttendances', component: UsersAttendancesComponent, canActivate: [authGuard] },
 ];

@@ -1,45 +1,38 @@
-<div>
+
+ <div class="navbar-container">
   <nav>
-    <h2><a routerLink="/">Employee Managment</a></h2>
+    <h2><a routerLink="/">Employee Management</a></h2>
     <ul>
-      @if (authService.isAuthenticated()) { @if(authService.gettoken().userRole
-      ==="admin"){
-      <li>
-        <a routerLink="/admin" routerLinkActive="active">Admin</a>
-      </li>
-      <li (click)="authService.logoutUser()">logout</li>
-      }@else {
-      <li><a routerLink="/user" routerLinkActive="active">UserData</a></li>
-      <li (click)="authService.logoutUser()">logout</li>
-      } }@else {
-      <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
-      <li><a routerLink="/signup" routerLinkActive="active">SignUp</a></li>
-      }
+      <ng-container *ngIf="authService.isAuthenticated()">
+        <ng-container *ngIf="authService.gettoken()?.userRole === 'admin'; else userLinks">
+          <li>
+            <a routerLink="/admin" routerLinkActive="active">Admin</a>
+          </li>
+          <li>
+            <a routerLink="/usersAttendances" routerLinkActive="active">Users Attendances</a>
+          </li>
+          <li>
+            <a routerLink="/usersSalaries" routerLinkActive="active">Users Salaries</a>
+          </li>
+          <li class="logout" (click)="authService.logoutUser()">Logout</li>
+        </ng-container>
+        <ng-template #userLinks>
+          <li>
+            <a routerLink="/user" routerLinkActive="active">User Data</a>
+          </li>
+          <li class="logout" (click)="authService.logoutUser()">Logout</li>
+        </ng-template>
+      </ng-container>
+      <ng-container *ngIf="!authService.isAuthenticated()">
+        <li>
+          <a routerLink="/login" routerLinkActive="active">Login</a>
+        </li>
+        <li>
+          <a routerLink="/signup" routerLinkActive="active">SignUp</a>
+        </li>
+      </ng-container>
     </ul>
   </nav>
-
   <hr />
 </div>
 
-<!-- <div>
-  <nav>
-    <h2><a routerLink="/">Employee Managment</a></h2>
-    <ul>
-      @if (authService.isAuthenticated()) { @if(authService.gettoken().userRole
-      ==="admin"){
-      <li>
-        <a routerLink="/admin" routerLinkActive="active">Admin {{ data }}</a>
-      </li>
-      <li (click)="authService.logoutUser()">logout</li>
-      }@else {
-      <li><a routerLink="/user" routerLinkActive="active">UserData</a></li>
-      <li (click)="authService.logoutUser()">logout</li>
-      } }@else {
-      <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
-      <li><a routerLink="/signup" routerLinkActive="active">SignUp</a></li>
-      }
-    </ul>
-  </nav>
-
-  <hr />
-</div> -->

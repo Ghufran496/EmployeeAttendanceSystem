@@ -1,7 +1,26 @@
-<p>user works!</p>
+<div class="center">
+<div *ngIf="UsersData && UsersData.length > 0" class="user-profile">
+    <div class="profile-header">
+      <h2>{{ UsersData[0].name }}</h2>
+      <p>Email: {{ UsersData[0].email }}</p>
+      <p>Role: {{ UsersData[0].roles }}</p>
+    </div>
+    
+    <div class="profile-details">
+      <h3>Attendance</h3>
+      <p>Date: {{ UsersData[0].attendance.attendanceDate | date:'mediumDate' }}</p>
+      <p>Check-in Time: {{ UsersData[0].attendance.checkInTime | date:'shortTime' }}</p>
+      <p>Check-out Time: {{ UsersData[0].attendance.checkOutTime | date:'shortTime' }}</p>
+      <p>Total Hours Worked: {{ UsersData[0].attendance.totalHoursWorked }}</p>
+      <p>Status: {{ UsersData[0].attendance.attendanceStatus }}</p>
+    </div>
+    
+    <div class="profile-details">
+      <h3>Salary Details</h3>
+      <p>Net Salary: {{ UsersData[0].salary.netSalary | currency:'USD':'symbol':'1.2-2' }}</p>
+      <p>Allowances: {{ UsersData[0].salary.allowances }}</p>
+      <p>Payment Method: {{ UsersData[0].salary.payMethod }}</p>
+    </div>
+</div>
 
-<!-- @if (UsersData === "undefined") {
-<p>wait data is being load</p>
-}@else { -->
-<p>{{ UsersData | json }}</p>
-<!-- } -->
+</div>

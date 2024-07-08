@@ -14,15 +14,17 @@ export const authGuard: CanActivateFn = (
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  const protectedRoutes: string[] = ['/admin','/user'];
+  const protectedRoutes: string[] = [
+    '/admin',
+    '/user',
+    '/usersSalaries',
+    '/usersAttendances',
+  ];
 
   return protectedRoutes.includes(state.url) && !authService.isAuthenticated()
     ? router.navigate(['/login'])
     : true;
 };
-
-
-
 
 // export const authGuard: CanActivateFn = (route, state) => {
 //   const authService = inject(AuthService);

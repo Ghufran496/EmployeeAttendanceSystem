@@ -16,8 +16,17 @@ export class AuthService {
   ) {
     if (isPlatformBrowser(this.platformId)) {
       this.tokenjwt = sessionStorage.getItem('tokenjwt');
-      this.UserData = sessionStorage.getItem('UserData');
-      console.log(this.UserData );
+      const userDataString = sessionStorage.getItem('UserData');
+
+      if (userDataString) {
+        try {
+          this.UserData = JSON.parse(userDataString);
+        } catch (error) {
+          console.error('Error parsing UserData from session storage', error);
+        }
+      }
+
+      console.log(this.UserData);
     }
   }
 
@@ -41,10 +50,10 @@ export class AuthService {
 
         if (this.UserData.userRole === 'admin') {
           this.router.navigate(['/admin']);
-          sessionStorage.setItem('UserData', this.UserData);
+          sessionStorage.setItem('UserData', JSON.stringify(this.UserData));
         } else {
           this.router.navigate(['/user']);
-          sessionStorage.setItem('UserData', this.UserData);
+          sessionStorage.setItem('UserData', JSON.stringify(this.UserData));
         }
         if (this.UserData.jwtToken) {
           sessionStorage.setItem('tokenjwt', this.UserData.jwtToken);
@@ -62,9 +71,10 @@ export class AuthService {
 
   logoutUser() {
     this.tokenjwt = undefined;
-    this.UserData =undefined;
+    this.UserData = undefined;
     sessionStorage.removeItem('tokenjwt');
     sessionStorage.removeItem('UserData');
+    sessionStorage.removeItem('authenticatedUserId');
     this.router.navigate(['/login']);
   }
 }
