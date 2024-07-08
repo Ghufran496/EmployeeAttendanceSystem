@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login-component',
@@ -10,6 +11,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 })
 export class LoginComponentComponent {
 
+  constructor(private authService:AuthService){}
  
 
   email =new FormControl("",[
@@ -32,8 +34,9 @@ export class LoginComponentComponent {
   })
 
   login(){
-    //this.authService.loginUser(this.loginForm.value.email!,this.loginForm.value.password!)
+    this.authService.loginUser(this.loginForm.value.email!,this.loginForm.value.password!)
   }
+  
   reset(){
     this.loginForm.reset()
   }

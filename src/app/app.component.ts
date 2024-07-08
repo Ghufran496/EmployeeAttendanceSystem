@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -12,18 +13,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 export class AppComponent {
   
   
-  /*constructor(private express) {}
-
-
-  ngOnInit() {
-    express = require('express');
-    app = this.express();
-    cors = require('cors');
-  
-    app.use(cors());
-  }
-
-  */
 
   title = 'Employee system';
 }

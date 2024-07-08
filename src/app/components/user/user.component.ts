@@ -7,34 +7,26 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css'
+  styleUrl: './user.component.css',
 })
 export class UserComponent {
-
   UsersData: any;
 
-  constructor(private userService: UserService ) {}
+  constructor(private userService: UserService) {}
 
   ngOnInit() {
-   this.getUsers();
-   
+    this.getUsers();
   }
 
   getUsers() {
     this.userService.getAllUsers().subscribe(
       (data) => {
         this.UsersData = data;
-        console.log(data)
+        console.log(data);
       },
       (err) => {
         console.log('error', err);
       }
     );
-
-
   }
-
-  
-
-  
 }
