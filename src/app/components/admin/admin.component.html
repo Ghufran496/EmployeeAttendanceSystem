@@ -1,1 +1,27 @@
-<p>admin works!</p>
+
+
+<div class="center">
+<div class="card-container">
+    <div *ngFor="let user of AllUsersData" class="user-card">
+        <h3>{{ user.name }}</h3>
+        <p>Email: {{ user.email }}</p>
+        <p>Role: {{ user.roles }}</p>
+        <div *ngIf="user.attendance" class="attendance" >
+            <h4>Attendance <span style="text-decoration: underline;color: grey;opacity: 0.5;font-size: 12px;">{{user.attendance.id}}</span></h4>
+            <p>Date: {{ user.attendance.attendanceDate | date }}</p>
+            <p>Check-In: {{ user.attendance.checkInTime | date:'shortTime' }}</p>
+            <p>Check-Out: {{ user.attendance.checkOutTime | date:'shortTime' }}</p>
+            <p>Hours Worked: {{ user.attendance.totalHoursWorked }}</p>
+            <p>Status: {{ user.attendance.attendanceStatus }}</p>
+        </div>
+        <div *ngIf="user.salary" class="salary">
+            <h4>Salary <span style="text-decoration: underline;color: grey;opacity: 0.5;font-size: 12px;">{{user.salary.id}}</span></h4>
+            <p>Net Salary: {{ user.salary.netSalary | currency }}</p>
+            <p>Allowances: {{ user.salary.allowances }}</p>
+            <p>Pay Method: {{ user.salary.payMethod }}</p>
+        </div>
+        <button class="delete-button">Delete</button>
+    </div>
+</div>
+</div>
+

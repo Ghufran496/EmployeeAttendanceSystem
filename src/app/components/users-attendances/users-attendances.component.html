@@ -1,1 +1,23 @@
-<p>users-attendances works!</p>
+<div class="container">
+  <h4>Enter Employee Attendance ID</h4>
+  <input type="text" placeholder="Enter ID here" [formControl]="Id" />
+  <button type="button" class="btn btn-success" (click)="fetchAttendance()">
+    Submit
+  </button>
+  <button type="button" class="btn btn-danger" (click)="reset()">Reset</button>
+</div>
+
+<div *ngIf="singleAttendance" class="card-container">
+  <div class="card">
+    <p>Id: {{ singleAttendance.id }}</p>
+    <p>Date: {{ singleAttendance.attendanceDate | date }}</p>
+    <p>Check-In: {{ singleAttendance.checkInTime | date : "shortTime" }}</p>
+    <p>Check-Out: {{ singleAttendance.checkOutTime | date : "shortTime" }}</p>
+    <p>Hours Worked: {{ singleAttendance.totalHoursWorked }}</p>
+    <p>Status: {{ singleAttendance.attendanceStatus }}</p>
+    <div class="button-container">
+      <button class="btn btn-primary">Edit</button>
+      <button class="btn btn-danger">Delete</button>
+    </div>
+  </div>
+</div>

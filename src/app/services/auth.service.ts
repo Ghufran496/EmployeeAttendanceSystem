@@ -26,7 +26,7 @@ export class AuthService {
         }
       }
 
-      console.log(this.UserData);
+      //console.log(this.UserData);
     }
   }
 

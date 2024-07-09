@@ -1,0 +1,143 @@
+.container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff; /* Added background color for better visibility */
+}
+
+h4 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center; /* Centered the heading */
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  box-sizing: border-box;
+}
+
+.red-text {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.btn-green, .btn-red, .btn-success, .btn-danger, .btn-primary {
+  padding: 10px 15px;
+  color: #fff;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+
+.btn-green, .btn-success {
+  background-color: #4CAF50;
+}
+
+.btn-red, .btn-danger {
+  background-color: #f44336;
+  margin-left: 20px;
+}
+
+.btn-primary {
+  background-color: #007bff;
+}
+
+.btn-green:disabled, .btn-red:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%; /* Ensure the card takes up full width within the container */
+  max-width: 400px; /* Limit the max width to match the container */
+  text-align: center;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: #333;
+}
+
+.card p {
+  margin-bottom: 10px;
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+.button-container button {
+  margin-right: 10px;
+}
+
+
+
+.card-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%; /* Ensure the card takes up full width within the container */
+    max-width: 400px; /* Limit the max width to match the container */
+    text-align: center;
+  }
+  
+  .card h3 {
+    margin-top: 0;
+    color: #333;
+  }
+  
+  .card p {
+    margin-bottom: 10px;
+    color: #666;
+  }
+  
+  .button-container {
+    margin-top: 20px;
+  }
+  
+  .button-container button {
+    margin-right: 10px;
+    padding: 10px 15px;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 3px;
+    text-transform: uppercase;
+  }
+  
+  .button-container .btn-primary {
+    background-color: #007bff;
+  }
+  
+  .button-container .btn-danger {
+    background-color: #f44336;
+  }
+  
