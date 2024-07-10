@@ -1,0 +1,22 @@
+<div class="container">
+    <h2>Update Salary</h2>
+    <form [formGroup]="updateSalaryForm" (ngSubmit)="onSubmit()" >
+      <div class="form-group">
+        <label for="netSalary">Net Salary</label>
+        <input id="netSalary" type="number" formControlName="netSalary" class="form-control" placeholder="Enter updated Net Salary" />
+      </div>
+      <div class="form-group">
+        <label for="allowances">Allowances</label>
+        <input id="allowances" type="text" formControlName="allowances" class="form-control" placeholder="Enter updated Allowances" />
+      </div>
+      <div class="form-group">
+        <label for="payMethod">Pay Method</label>
+        <input id="payMethod" type="text" formControlName="payMethod" class="form-control" placeholder="Enter updated Pay Method" />
+      </div>
+      <div class="button-container">
+        <button type="submit" class="btn btn-success">Update</button>
+        <button type="button" class="btn btn-danger" (click)="onReset()">Reset</button>
+      </div>
+    </form>
+  </div>
+  

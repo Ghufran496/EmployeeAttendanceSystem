@@ -49,6 +49,7 @@ input {
 
 .btn-primary {
   background-color: #007bff;
+  text-decoration: none;
 }
 
 .btn-green:disabled, .btn-red:disabled {

@@ -1,61 +1,80 @@
 .card-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    background-color: #f0f2f5;
-    min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background-color: #f0f2f5;
+  min-height: 100vh;
 }
 
-.center{
-    background-color: #f0f2f5;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.center {
+  background-color: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .user-card {
-    border: 1px solid #ccc;
-    border-radius: 12px;
-    padding: 20px;
-    margin: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-    width: 300px;
-    text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  width: 300px;
+  text-align: center;
 }
+.anchor {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .anchor:hover {
+    background-color: #f0f0f0;
+    color: #007bff;
+  }
+
+  .attendance-id, .salary-id {
+    text-decoration: underline;
+    color: grey;
+    opacity: 0.5;
+    font-size: 12px;
+  }
 
 .user-card h3 {
-    margin-top: 0;
-    color: #333;
+  margin-top: 0;
+  color: #333;
 }
 
-.attendance, .salary {
-    margin-top: 16px;
-    text-align: left;
+.attendance,
+.salary {
+  margin-top: 16px;
+  text-align: left;
 }
 
-.attendance h4, .salary h4 {
-    margin-bottom: 8px;
-    color: #555;
+.attendance h4,
+.salary h4 {
+  margin-bottom: 8px;
+  color: #555;
 }
 
-.attendance p, .salary p {
-    margin: 4px 0;
-    color: #777;
+.attendance p,
+.salary p {
+  margin: 4px 0;
+  color: #777;
 }
 
 .delete-button {
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: background-color 0.3s;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background-color 0.3s;
 }
 
 .delete-button:hover {
-    background-color: #c0392b;
+  background-color: #c0392b;
 }

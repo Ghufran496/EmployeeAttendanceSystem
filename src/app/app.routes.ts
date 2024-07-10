@@ -7,6 +7,8 @@ import { authGuard } from './guard/auth.guard';
 import { restrictGuard } from './guard/restrict.guard';
 import { UsersSalariesComponent } from './components/users-salaries/users-salaries.component';
 import { UsersAttendancesComponent } from './components/users-attendances/users-attendances.component';
+import { UpdateSalaryComponent } from './components/update-salary/update-salary.component';
+import { UpdateAttendanceComponent } from './components/update-attendance/update-attendance.component';
 
 export const routes: Routes = [
   {
@@ -24,5 +26,7 @@ export const routes: Routes = [
 
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
   { path: 'usersSalaries', component: UsersSalariesComponent, canActivate: [authGuard] },
+  { path: 'usersSalaries/:id', component: UpdateSalaryComponent, canActivate: [authGuard] },
   { path: 'usersAttendances', component: UsersAttendancesComponent, canActivate: [authGuard] },
+  { path: 'usersAttendances/:id', component: UpdateAttendanceComponent, canActivate: [authGuard] },
 ];

@@ -1,16 +1,4 @@
-<!-- <p>users-salaries works!</p>
 
-<form class="container">
-  <h4>Enter Employee ID</h4>
-
-  <input type="text" placeholder="Enter ID here" [formControl]="Id" />
-  <button type="button" class="btn-green" (click)="fetchSalary()">Submit</button>
-  <button type="button" class="btn-red" (click)="reset()">Reset</button>
-</form>
-
-
-<p>{{singleSalary|json}}</p>
- -->
 
  <div class="container">
     <h4>Enter Employee Salary ID</h4>
@@ -27,7 +15,7 @@
       <p>Allowances: {{ singleSalary.allowances }}</p>
       <p>Pay Method: {{ singleSalary.payMethod }}</p>
       <div class="button-container">
-        <button class="btn btn-primary" >Edit</button>
+        <a class="btn btn-primary" [href]="'/usersSalaries/' + singleSalary.id">Edit</a>
         <button class="btn btn-danger">Delete</button>
       </div>
     </div>

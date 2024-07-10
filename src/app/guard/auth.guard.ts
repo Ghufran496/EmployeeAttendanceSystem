@@ -14,25 +14,17 @@ export const authGuard: CanActivateFn = (
   const authService = inject(AuthService);
   const router = inject(Router);
 
-  const protectedRoutes: string[] = [
-    '/admin',
-    '/user',
-    '/usersSalaries',
-    '/usersAttendances',
-  ];
+const protectedRoutes: RegExp[] = [
+  /^\/admin/,
+  /^\/user/,
+  /^\/usersSalaries(\/.*)?$/,
+  /^\/usersAttendances(\/.*)?$/,
 
-  return protectedRoutes.includes(state.url) && !authService.isAuthenticated()
-    ? router.navigate(['/login'])
-    : true;
+];
+
+const isProtectedRoute = protectedRoutes.some((regex) => regex.test(state.url));
+
+return isProtectedRoute && !authService.isAuthenticated()
+  ? router.navigate(['/login'])
+  : true;
 };
-
-// export const authGuard: CanActivateFn = (route, state) => {
-//   const authService = inject(AuthService);
-//   const router = inject(Router);
-//   if (authService.isAuthenticated()) {
-//     return true;
-//   } else {
-//     router.navigate(['/login']);
-//     return false;
-//   }
-// };
