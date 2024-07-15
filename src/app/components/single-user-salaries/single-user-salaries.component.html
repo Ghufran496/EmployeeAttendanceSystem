@@ -30,6 +30,16 @@
     <!-- Attendances Section -->
     <div class="attendances-section">
       <h3>Attendances</h3>
+      <div class="wrapper">
+        <!-- <div class="toolPanel">
+          <button (click)="missingYValues()">Missing Y Values</button>
+          <span class="spacer"></span>
+          <button (click)="missingXValue()">Missing X Value</button>
+          <span class="spacer"></span>
+          <button (click)="reset()">Reset</button>
+        </div> -->
+        <ag-charts [options]="options" class="chart"></ag-charts>
+      </div>
       <div *ngIf="singleuserAllAttendances.length > 0; else noAttendances">
         <div *ngFor="let attendance of singleuserAllAttendances" class="data-card">
           <div class="card-header">
