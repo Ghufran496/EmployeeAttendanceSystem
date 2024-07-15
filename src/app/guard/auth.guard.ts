@@ -151,7 +151,7 @@ export const authGuard: CanActivateFn = (
       }
     }
   } else {
-    console.log('No user data found. Redirecting to login.');
+    console.log('No user data found. Redirecting.. to login.');
     router.navigate(['/login']);
     return false;
   }
