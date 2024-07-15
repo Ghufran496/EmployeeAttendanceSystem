@@ -11,5 +11,6 @@ export class UserService {
   getAllUsers(){
     return this.http.get("https://localhost:7262/api/User")
   }
+  
 
 }

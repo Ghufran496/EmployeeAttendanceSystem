@@ -20,6 +20,11 @@ export class UsersSalariesComponent {
     this.getSingleUserSalById(this.Id.value); // Use this.Id.value to get the actual value
   }
 
+  deleteSalary() {
+    this.deleteUserSalById(this.Id.value); // Use this.Id.value to get the actual value
+    //console.log(this.Id.value)
+  }
+
   reset() {
     this.Id.reset();
   }
@@ -28,10 +33,22 @@ export class UsersSalariesComponent {
     this.adminService.getUserSalById(_Id).subscribe(
       (data: any) => {
         this.singleSalary = data;
-        console.log(this.singleSalary);
+        //console.log(this.singleSalary);
       },
       (err) => {
         console.log('Error fetching user salary by Id:', err);
+      }
+    );
+  }
+
+  deleteUserSalById(_Id: any) {
+    this.adminService.delUserSalById(_Id).subscribe(
+      (data: any) => {
+        this.singleSalary = data;
+        //console.log(this.singleSalary);
+      },
+      (err) => {
+        console.log('Error deleting user salary by Id:', err);
       }
     );
   }

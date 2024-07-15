@@ -1,10 +1,16 @@
 <div class="center">
   <div class="card-container">
     <div *ngFor="let user of AllUsersData" class="user-card">
+      <a
+        [href]="'/admin/Salary/' + user.id"
+        style="text-decoration: none;"
+        class="anchor"
+      >
       <h3>{{ user.name }}</h3>
       <p>Email: {{ user.email }}</p>
       <p>Role: {{ user.roles }}</p>
-      <a
+    </a>
+      <!-- <a
         [href]="'/usersAttendances/' + user.attendance.id"
         style="text-decoration: none;"
         class="anchor"
@@ -22,7 +28,7 @@
               >{{ user.attendance.id }}</span
             >
           </h4>
-          <p>Date: {{ user.attendance.attendanceDate | date }}</p>
+          <p>Dated: {{ user.attendance.attendanceDate | date }}</p>
           <p>
             Check-In: {{ user.attendance.checkInTime | date : "shortTime" }}
           </p>
@@ -54,7 +60,7 @@
           <p>Allowances: {{ user.salary.allowances }}</p>
           <p>Pay Method: {{ user.salary.payMethod }}</p>
         </div>
-      </a>
+      </a> -->
       <button class="delete-button">Delete</button>
     </div>
   </div>

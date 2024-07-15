@@ -16,8 +16,8 @@
     <p>Hours Worked: {{ singleAttendance.totalHoursWorked }}</p>
     <p>Status: {{ singleAttendance.attendanceStatus }}</p>
     <div class="button-container">
-      <a class="btn btn-primary" [href]="'/usersAttendances/' + singleAttendance.id">Edit</a>
-      <button class="btn btn-danger">Delete</button>
+      <a class="btn btn-primary" [href]="'/usersAttendances/Attendance/' + singleAttendance.id">Edit</a>
+      <button class="btn btn-danger" (click)="deleteAttendance()">Delete</button>
     </div>
   </div>
 </div>

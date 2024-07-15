@@ -1,26 +1,33 @@
 <div class="center">
-<div *ngIf="UsersData && UsersData.length > 0" class="user-profile">
+  <div *ngIf="UsersData && UsersData.length > 0" class="user-profile">
     <div class="profile-header">
-      <h2>{{ UsersData[0].name }}</h2>
+      <h2>{{ UsersData[0].name | uppercase }}</h2>
       <p>Email: {{ UsersData[0].email }}</p>
       <p>Role: {{ UsersData[0].roles }}</p>
     </div>
-    
     <div class="profile-details">
-      <h3>Attendance</h3>
-      <p>Date: {{ UsersData[0].attendance.attendanceDate | date:'mediumDate' }}</p>
-      <p>Check-in Time: {{ UsersData[0].attendance.checkInTime | date:'shortTime' }}</p>
-      <p>Check-out Time: {{ UsersData[0].attendance.checkOutTime | date:'shortTime' }}</p>
-      <p>Total Hours Worked: {{ UsersData[0].attendance.totalHoursWorked }}</p>
-      <p>Status: {{ UsersData[0].attendance.attendanceStatus }}</p>
+     <h1>Employee Attendance&Salary Details</h1>
     </div>
-    
-    <div class="profile-details">
-      <h3>Salary Details</h3>
-      <p>Net Salary: {{ UsersData[0].salary.netSalary | currency:'USD':'symbol':'1.2-2' }}</p>
-      <p>Allowances: {{ UsersData[0].salary.allowances }}</p>
-      <p>Payment Method: {{ UsersData[0].salary.payMethod }}</p>
-    </div>
+  </div>
 </div>
 
+
+<div style="margin: 4rem;">
+  <app-charts></app-charts>
 </div>
+
+<div *ngIf="authenticatedEmployeeSalary && authenticatedEmployeeSalary.length" style="display: flex; justify-content: center;align-items: center;">
+  <div *ngFor="let salary of authenticatedEmployeeSalary" class="salary-card">
+    <div class="card-header">
+      <h2>Employee: {{salary.user.name | uppercase}}</h2>
+    </div>
+    <div class="card-body">
+      <p><strong>Net Salary:</strong> {{salary.netSalary | currency:"PKR"}}</p>
+      <p><strong>Allowances:</strong> {{salary.allowances}}</p>
+      <p><strong>Payment Method:</strong> {{salary.payMethod}}</p>
+    </div>
+  </div>
+</div>
+
+
+
