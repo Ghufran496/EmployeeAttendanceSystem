@@ -9,6 +9,8 @@ import { UsersSalariesComponent } from './components/users-salaries/users-salari
 import { UsersAttendancesComponent } from './components/users-attendances/users-attendances.component';
 import { UpdateSalaryComponent } from './components/update-salary/update-salary.component';
 import { UpdateAttendanceComponent } from './components/update-attendance/update-attendance.component';
+import { SingleUserSalariesComponent } from './components/single-user-salaries/single-user-salaries.component';
+import { SingleUserAttendancesComponent } from './components/single-user-attendances/single-user-attendances.component';
 
 export const routes: Routes = [
   {
@@ -25,8 +27,12 @@ export const routes: Routes = [
 
 
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
+  { path: 'admin/Salary/:id', component: SingleUserSalariesComponent, canActivate: [authGuard] },
+  { path: 'admin/Attendance/:id', component: SingleUserAttendancesComponent, canActivate: [authGuard] },
   { path: 'usersSalaries', component: UsersSalariesComponent, canActivate: [authGuard] },
-  { path: 'usersSalaries/:id', component: UpdateSalaryComponent, canActivate: [authGuard] },
+  { path: 'usersSalaries/Salary/:id', component: UpdateSalaryComponent, canActivate: [authGuard] },
   { path: 'usersAttendances', component: UsersAttendancesComponent, canActivate: [authGuard] },
-  { path: 'usersAttendances/:id', component: UpdateAttendanceComponent, canActivate: [authGuard] },
+  { path: 'usersAttendances/Attendance/:id', component: UpdateAttendanceComponent, canActivate: [authGuard] },
 ];
+
+

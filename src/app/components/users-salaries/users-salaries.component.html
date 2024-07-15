@@ -15,8 +15,8 @@
       <p>Allowances: {{ singleSalary.allowances }}</p>
       <p>Pay Method: {{ singleSalary.payMethod }}</p>
       <div class="button-container">
-        <a class="btn btn-primary" [href]="'/usersSalaries/' + singleSalary.id">Edit</a>
-        <button class="btn btn-danger">Delete</button>
+        <a class="btn btn-primary" [href]="'/usersSalaries/Salary/' + singleSalary.id">Edit</a>
+        <button class="btn btn-danger" (click)="deleteSalary()">Delete</button>
       </div>
     </div>
   </div>

@@ -23,6 +23,11 @@ export class UsersAttendancesComponent {
     this.Id.reset();
   }
 
+  deleteAttendance() {
+    this.deleteUserAttendById(this.Id.value); // Use this.Id.value to get the actual value
+    console.log(this.Id.value)
+  }
+
   getSingleUserAttendById(_Id: any) {
     this.adminService.getUserAttenById(_Id).subscribe(
       (data: any) => {
@@ -34,4 +39,18 @@ export class UsersAttendancesComponent {
       }
     );
   }
+
+  deleteUserAttendById(_Id: any) {
+    this.adminService.delUserAttendanceById(_Id).subscribe(
+      (data: any) => {
+        this.singleAttendance = data;
+        console.log(this.singleAttendance);
+      },
+      (err) => {
+        alert("Error deleting user Attendance by Id");
+        console.log('Error deleting user Attendance by Id:', err);
+      }
+    );
+  }
+
 }

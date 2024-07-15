@@ -9,10 +9,16 @@ import { NavbarComponent } from './components/navbar/navbar.component';
   imports: [RouterOutlet, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
+  template:
+  `<ag-charts
+    style="height: 100%"
+    [options]="chartOptions">
+   </ag-charts>`,
 })
 export class AppComponent {
   //36127359-6b07-4a62-a3a0-2d96581321e1
   
 
   title = 'Employee system';
+  
 }
