@@ -4,19 +4,21 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
 import { ChartsComponent } from '../charts/charts.component';
 import { AdminService } from '../../services/admin.service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-user',
   standalone: true,
   imports: [CommonModule, ChartsComponent],
   templateUrl: './user.component.html',
-  styleUrl: './user.component.css',
+  styleUrls: ['./user.component.css'],
 })
 export class UserComponent {
   UsersData: any;
   authenticatedUserId: any;
   authenticatedEmployeeSalary: any;
+  isCheckedIn: boolean = false; // State variable for check-in status
+  checkInTime?: string;
+  checkOutTime?: string;
 
   constructor(
     private userService: UserService,
@@ -35,6 +37,7 @@ export class UserComponent {
     const UserId = this.authenticatedUserId;
     this.getUsers();
     this.getEmployeeSalary(UserId);
+    this.loadClockInState();
   }
 
   getUsers() {
@@ -51,8 +54,6 @@ export class UserComponent {
         } else {
           this.UsersData = [];
         }
-
-        //console.log(this.UsersData);
       },
       (err) => {
         console.log('error', err);
@@ -64,8 +65,6 @@ export class UserComponent {
     this.adminService.getSingleUserAllSalById(_id).subscribe(
       (data) => {
         this.authenticatedEmployeeSalary = data;
-
-        //console.log(this.authenticatedEmployeeSalary);
       },
       (err) => {
         console.log('error', err);
@@ -83,20 +82,23 @@ export class UserComponent {
 
     const userId = this.authService.gettoken().id;
     const currentDate = new Date();
+
     const checkInTime = currentDate.toISOString();
+    //console.log(checkInTime);
     const checkOutTime = new Date(
       currentDate.getTime() + 8 * 60 * 60 * 1000
     ).toISOString();
 
     const newId = this.generateGUID();
-    // console.log(newId);
 
     const checkedInUserInfo = {
       attendanceId: newId,
       EmployeeId: userId,
+      checkInTime: checkInTime,
     };
 
     localStorage.setItem('CheckedInId', JSON.stringify(checkedInUserInfo));
+    localStorage.setItem('checkInTime', checkInTime);
 
     const newAttendance = {
       id: newId,
@@ -110,6 +112,9 @@ export class UserComponent {
     this.userService.CreateEmployeeAttendance(newAttendance).subscribe(
       (data) => {
         alert('You have successfully marked your attendance for today');
+        this.isCheckedIn = true; // Update state
+        this.checkInTime = currentDate.toLocaleString();
+        localStorage.setItem('checkInTimeDisplay', this.checkInTime); // Store display time
       },
       (err) => {
         console.log('error in marking attendance', err);
@@ -117,7 +122,6 @@ export class UserComponent {
     );
   }
 
-  public checkInData?: any;
   public storedemployeeAttendance: any;
 
   clockedOut() {
@@ -129,18 +133,40 @@ export class UserComponent {
       this.adminService.getUserAttenById(checkInData.attendanceId).subscribe(
         (data) => {
           this.storedemployeeAttendance = data;
-          console.log(this.storedemployeeAttendance);
+          //console.log(this.storedemployeeAttendance);
 
           const checkInTime = new Date(
             this.storedemployeeAttendance.checkInTime
           );
+          //console.log(checkInTime);
+
+          // const currentDate = new Date();
+          // const checkOutTime = currentDate.toISOString();
+
+          // const diffInMs = currentDate.getHours() - checkInTime.getHours();
+          // console.log(currentDate.getHours() + ' ' + checkInTime.getHours());
+
+          // let TotalHoursWorked = Math.round(diffInMs / (1000 * 60 * 60));
+
+          // console.log(TotalHoursWorked);
+
+          // if (TotalHoursWorked == 0 || TotalHoursWorked < 0) {
+          //   TotalHoursWorked = 0;
+          // }
+
           const currentDate = new Date();
           const checkOutTime = currentDate.toISOString();
-          const diffInMs = currentDate.getTime() - checkInTime.getTime();
-          console.log(currentDate.getTime()+" : "+ checkInTime.getTime());
 
-          const TotalHoursWorked = diffInMs / (1000 * 60 * 60);
-          console.log(TotalHoursWorked);
+         // console.log(currentDate);
+
+           let TotalHoursWorked  = currentDate.getHours() - checkInTime.getHours();
+          //console.log(currentDate.getHours() + ' ' + checkInTime.getHours());
+
+          //console.log(TotalHoursWorked);
+
+          if (TotalHoursWorked == 0 || TotalHoursWorked < 0) {
+            TotalHoursWorked = 0;
+          }
 
           const updatedAttendance = {
             attendanceDate: this.storedemployeeAttendance.attendanceDate,
@@ -149,43 +175,51 @@ export class UserComponent {
             totalHoursWorked: TotalHoursWorked,
             attendanceStatus: this.storedemployeeAttendance.attendanceStatus,
           };
-          console.log(updatedAttendance);
+
+          this.userService
+            .updateCheckOutTimeEmployee(
+              checkInData.attendanceId,
+              updatedAttendance
+            )
+            .subscribe(
+              (response) => {
+                console.log('Attendance updated successfully:', response);
+                alert('Attendance updated successfully');
+                localStorage.removeItem('CheckedInId');
+                localStorage.removeItem('checkInTime');
+                this.isCheckedIn = false; // Update state
+                this.checkOutTime = currentDate.toLocaleString();
+                localStorage.setItem('checkOutTimeDisplay', this.checkOutTime); // Store display time
+              },
+              (err) => {
+                console.log('Error updating Attendance: ', err);
+              }
+            );
         },
         (err) => {
           console.log('error in fetching attendance', err);
         }
       );
     }
+  }
 
-    // if(this.storedemployeeAttendance){
-    //   console.log("i am here "+this.storedemployeeAttendance);
-    // }
+  toggleClock() {
+    if (this.isCheckedIn) {
+      this.clockedOut();
+    } else {
+      this.clockedIn();
+    }
+  }
 
-    // const checkInTime = new Date(
-    //   this.storedemployeeAttendance.checkInTime
-    // );
-    // const currentDate = new Date();
-    // const checkOutTime = currentDate.toISOString();
-    // const diffInMs = currentDate.getTime() - checkInTime.getTime();
-    // const TotalHoursWorked = diffInMs / (1000 * 60 * 60);
+  loadClockInState() {
+    const storedCheckedIn = localStorage.getItem('CheckedInId');
+    this.isCheckedIn = !!storedCheckedIn;
 
-    // const updatedAttendance = {
-    //   attendanceDate: this.storedemployeeAttendance.attendanceDate,
-    //   checkInTime: this.storedemployeeAttendance.checkInTime,
-    //   checkOutTime: checkOutTime,
-    //   totalHoursWorked: TotalHoursWorked,
-    //   attendanceStatus: this.storedemployeeAttendance.attendanceStatus,
-    // };
-    // console.log(updatedAttendance);
-
-    // this.userService.CreateEmployeeAttendance(newAttendance).subscribe(
-    //   (data) => {
-    //     alert('You have successfully marked your attendance for today');
-    //   },
-    //   (err) => {
-    //     console.log('error in marking attendance', err);
-    //   }
-    // );
+    if (this.isCheckedIn) {
+      this.checkInTime = localStorage.getItem('checkInTimeDisplay') || '';
+    } else {
+      this.checkOutTime = localStorage.getItem('checkOutTimeDisplay') || '';
+    }
   }
 
   generateGUID() {
@@ -210,3 +244,4 @@ export class UserComponent {
     );
   }
 }
+

@@ -75,12 +75,14 @@ body {
     transition: transform 0.3s ease;
     background-color: #f9f9f9;
   }
-  .button-container {
 
+  
+
+  .button-container {
     display: flex;
-    justify-content: space-between;
-    margin: 0px 10rem 0px 10rem;
-    
+    flex-direction: column;
+    align-items: center;
+    margin: 0px 10rem;
   }
   
   .clock-button {
@@ -90,10 +92,11 @@ body {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
+    margin-bottom: 10px;
   }
   
   .clock-in {
-    background-color: #4CAF50;
+    background-color: #4caf50;
     color: white;
   }
   
@@ -109,6 +112,29 @@ body {
   .clock-button:active {
     transform: scale(1);
   }
+  
+  .time-info {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #f0f0f0;
+    width: 50%;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .time-info p {
+    font-size: 16px;
+    color: #333;
+    margin: 5px 0;
+  }
+  
+  .time-info p:first-child {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+  }
+  
+  
   .salary-card:hover {
     transform: translateY(-5px);
   }

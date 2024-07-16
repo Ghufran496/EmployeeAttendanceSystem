@@ -12,9 +12,22 @@
 </div>
 
 <div class="button-container">
-  <button class="clock-button clock-in" (click)="clockedIn()">Clock In</button>
-  <button class="clock-button clock-out" (click)="clockedOut()">Clock Out</button>
+  <button
+    class="clock-button"
+    [ngClass]="{ 'clock-in': !isCheckedIn, 'clock-out': isCheckedIn }"
+    (click)="toggleClock()"
+  >
+    {{ isCheckedIn ? 'Clock Out' : 'Clock In' }}
+  </button>
 </div>
+<div style="display: flex;justify-content: center;align-items: center;">
+  <div class="time-info">
+  <p *ngIf="checkInTime">Checked in at: {{ checkInTime | date: 'short' }}</p>
+  <p *ngIf="checkOutTime">Checked out at: {{ checkOutTime | date: 'short' }}</p>
+</div>
+</div>
+
+
 
 <div style="margin: 4rem;">
   <app-charts></app-charts>
