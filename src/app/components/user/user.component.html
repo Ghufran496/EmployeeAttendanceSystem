@@ -11,20 +11,22 @@
   </div>
 </div>
 
+
 <div class="button-container">
   <button
     class="clock-button"
-    [ngClass]="{ 'clock-in': !isCheckedIn, 'clock-out': isCheckedIn }"
+    [ngClass]="{ 'clock-in': !isCheckedIn, 'clock-out': isCheckedIn,'hidden': buttonDisabled }"
     (click)="toggleClock()"
+    [disabled]="buttonDisabled"
   >
     {{ isCheckedIn ? 'Clock Out' : 'Clock In' }}
   </button>
 </div>
 <div style="display: flex;justify-content: center;align-items: center;">
   <div class="time-info">
-  <p *ngIf="checkInTime">Checked in at: {{ checkInTime | date: 'short' }}</p>
-  <p *ngIf="checkOutTime">Checked out at: {{ checkOutTime | date: 'short' }}</p>
-</div>
+    <p *ngIf="checkInTime">Checked in at: {{ checkInTime | date: 'short' }}</p>
+    <p *ngIf="checkOutTime">Checked out at: {{ checkOutTime | date: 'short' }}</p>
+  </div>
 </div>
 
 

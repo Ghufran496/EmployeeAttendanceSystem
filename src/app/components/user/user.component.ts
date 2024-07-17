@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service';
@@ -12,13 +12,14 @@ import { AdminService } from '../../services/admin.service';
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css'],
 })
-export class UserComponent {
+export class UserComponent implements OnInit {
   UsersData: any;
   authenticatedUserId: any;
   authenticatedEmployeeSalary: any;
   isCheckedIn: boolean = false; // State variable for check-in status
   checkInTime?: string;
   checkOutTime?: string;
+  buttonDisabled: boolean = false; // State variable for button
 
   constructor(
     private userService: UserService,
@@ -38,6 +39,8 @@ export class UserComponent {
     this.getUsers();
     this.getEmployeeSalary(UserId);
     this.loadClockInState();
+    this.loadButtonState();
+    this.checkButtonState();
   }
 
   getUsers() {
@@ -73,18 +76,10 @@ export class UserComponent {
   }
 
   clockedIn() {
-    const storedCheckedIn = localStorage.getItem('CheckedInId');
-
-    if (storedCheckedIn) {
-      alert('Already checked In Today, Do check Out first');
-      return;
-    }
-
     const userId = this.authService.gettoken().id;
     const currentDate = new Date();
 
     const checkInTime = currentDate.toISOString();
-    //console.log(checkInTime);
     const checkOutTime = new Date(
       currentDate.getTime() + 8 * 60 * 60 * 1000
     ).toISOString();
@@ -109,12 +104,15 @@ export class UserComponent {
       attendanceStatus: 'present',
       userId: userId,
     };
+
     this.userService.CreateEmployeeAttendance(newAttendance).subscribe(
       (data) => {
         alert('You have successfully marked your attendance for today');
         this.isCheckedIn = true; // Update state
         this.checkInTime = currentDate.toLocaleString();
         localStorage.setItem('checkInTimeDisplay', this.checkInTime); // Store display time
+        this.buttonDisabled = false; // Disable the button
+        this.saveButtonState(); // Save the button state
       },
       (err) => {
         console.log('error in marking attendance', err);
@@ -133,37 +131,14 @@ export class UserComponent {
       this.adminService.getUserAttenById(checkInData.attendanceId).subscribe(
         (data) => {
           this.storedemployeeAttendance = data;
-          //console.log(this.storedemployeeAttendance);
-
           const checkInTime = new Date(
             this.storedemployeeAttendance.checkInTime
           );
-          //console.log(checkInTime);
-
-          // const currentDate = new Date();
-          // const checkOutTime = currentDate.toISOString();
-
-          // const diffInMs = currentDate.getHours() - checkInTime.getHours();
-          // console.log(currentDate.getHours() + ' ' + checkInTime.getHours());
-
-          // let TotalHoursWorked = Math.round(diffInMs / (1000 * 60 * 60));
-
-          // console.log(TotalHoursWorked);
-
-          // if (TotalHoursWorked == 0 || TotalHoursWorked < 0) {
-          //   TotalHoursWorked = 0;
-          // }
 
           const currentDate = new Date();
           const checkOutTime = currentDate.toISOString();
 
-         // console.log(currentDate);
-
-           let TotalHoursWorked  = currentDate.getHours() - checkInTime.getHours();
-          //console.log(currentDate.getHours() + ' ' + checkInTime.getHours());
-
-          //console.log(TotalHoursWorked);
-
+          let TotalHoursWorked = currentDate.getHours() - checkInTime.getHours();
           if (TotalHoursWorked == 0 || TotalHoursWorked < 0) {
             TotalHoursWorked = 0;
           }
@@ -185,11 +160,13 @@ export class UserComponent {
               (response) => {
                 console.log('Attendance updated successfully:', response);
                 alert('Attendance updated successfully');
-                localStorage.removeItem('CheckedInId');
-                localStorage.removeItem('checkInTime');
-                this.isCheckedIn = false; // Update state
+                //localStorage.removeItem('CheckedInId');
+                //localStorage.removeItem('checkInTime');
+                this.isCheckedIn = true; // Update state
                 this.checkOutTime = currentDate.toLocaleString();
                 localStorage.setItem('checkOutTimeDisplay', this.checkOutTime); // Store display time
+                this.buttonDisabled = true; // Disable the button
+                this.saveButtonState(); // Save the button state
               },
               (err) => {
                 console.log('Error updating Attendance: ', err);
@@ -215,10 +192,40 @@ export class UserComponent {
     const storedCheckedIn = localStorage.getItem('CheckedInId');
     this.isCheckedIn = !!storedCheckedIn;
 
-    if (this.isCheckedIn) {
-      this.checkInTime = localStorage.getItem('checkInTimeDisplay') || '';
-    } else {
-      this.checkOutTime = localStorage.getItem('checkOutTimeDisplay') || '';
+    this.checkInTime = localStorage.getItem('checkInTimeDisplay') || '';
+    this.checkOutTime = localStorage.getItem('checkOutTimeDisplay') || '';
+  }
+
+  checkButtonState() {
+    const now = new Date();
+    const nextDay = new Date();
+    nextDay.setDate(now.getDate() + 1);
+    nextDay.setHours(0, 0, 0, 0);
+
+   const timeUntilMidnight = nextDay.getTime() - now.getTime();
+    //const timeUntilMidnight = 60000;
+
+    setTimeout(() => {
+      this.buttonDisabled = false; // Enable the button at midnight
+      this.checkInTime = '';
+      this.checkOutTime = '';
+      this.isCheckedIn = false; // Update state
+      localStorage.removeItem('checkInTimeDisplay');
+      localStorage.removeItem('checkOutTimeDisplay');
+      localStorage.removeItem('checkInTime');
+      localStorage.removeItem('CheckedInId');
+      this.saveButtonState(); // Save the button state
+    }, timeUntilMidnight);
+  }
+
+  saveButtonState() {
+    localStorage.setItem('buttonDisabled', JSON.stringify(this.buttonDisabled));
+  }
+
+  loadButtonState() {
+    const storedButtonState = localStorage.getItem('buttonDisabled');
+    if (storedButtonState !== null) {
+      this.buttonDisabled = JSON.parse(storedButtonState);
     }
   }
 
@@ -244,4 +251,5 @@ export class UserComponent {
     );
   }
 }
+
 
