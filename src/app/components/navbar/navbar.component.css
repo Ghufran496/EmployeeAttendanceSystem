@@ -15,6 +15,9 @@ body {
     overflow: hidden;
 }
 
+.hidden{
+    display: none;
+}
 /* Navigation bar styles */
 nav {
     display: flex;

@@ -118,7 +118,7 @@ export const authGuard: CanActivateFn = (
       regex.test(state.url)
     );
 
-    console.log(isAccessingAdminRoute + 'Admin route');
+    //console.log(isAccessingAdminRoute + 'Admin route');
 
     // Redirect to login if user is not authenticated
     if (!authService.isAuthenticated()) {
@@ -140,7 +140,7 @@ export const authGuard: CanActivateFn = (
       const isAccessingEmployeeRoute = protectedRoutes['employee'].some(
         (regex) => regex.test(state.url)
       );
-      console.log(isAccessingEmployeeRoute + 'employee route');
+      //console.log(isAccessingEmployeeRoute + 'employee route');
       // Prevent admins from accessing employee routes
       if (isAdmin && isAccessingEmployeeRoute) {
         console.log(
