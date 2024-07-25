@@ -159,7 +159,7 @@ export class SingleUserSalariesComponent {
 
   updateChartData() {
     const chartData = this.singleuserAllAttendances.map((attendance: any) => {
-      console.log(attendance)
+      //console.log(attendance)
       // Format checkInTime and checkOutTime as required
       const attendanceDate = new Date(attendance.attendanceDate);
       const checkInTime = this.formatTime(attendance.checkInTime);
