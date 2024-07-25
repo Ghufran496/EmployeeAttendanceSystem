@@ -1,66 +1,92 @@
+<div class="user-data-container">
+  <h2>Employee Data</h2>
 
-
-   <div class="user-data-container">
-    <h2>Employee Data</h2>
-    
-    <!-- Salaries Section -->
-    <div class="salaries-section">
-      <h3>Salaries</h3>
-      <div *ngIf="singleuserAllSalaries.length > 0; else noSalaries">
-        <div *ngFor="let salary of singleuserAllSalaries" class="data-card">
-          <div class="card-header">
-            <h4>Salary ID: {{ salary.id }}</h4>
-          </div>
-          <div class="card-body">
-            <p><strong>Allowances:</strong> {{ salary.allowances }}</p>
-            <p><strong>NET Salary:</strong> {{ salary.netSalary }}</p>
-            <p><strong>Pay Method:</strong> {{ salary.payMethod }}</p>
-          </div>
-          <div class="card-footer">
-            <a class="edit-btn" [href]="'/usersSalaries/Salary/' + salary.id">Edit</a>
-            <button class="delete-btn" (click)="deleteSalary(salary.id)">Delete</button>
-          </div>
+  <!-- Salaries Section -->
+  <div class="salaries-section">
+    <h3>Salaries</h3>
+    <div *ngIf="singleuserAllSalaries.length > 0; else noSalaries">
+      <div *ngFor="let salary of singleuserAllSalaries" class="data-card">
+        <div class="card-header">
+          <h4>Salary ID: {{ salary.id }}</h4>
+        </div>
+        <div class="card-body">
+          <p><strong>Allowances:</strong> {{ salary.allowances }}</p>
+          <p><strong>NET Salary:</strong> {{ salary.netSalary }}</p>
+          <p><strong>Pay Method:</strong> {{ salary.payMethod }}</p>
+        </div>
+        <div class="card-footer">
+          <a class="edit-btn" [href]="'/usersSalaries/Salary/' + salary.id"
+            >Edit</a
+          >
+          <button class="delete-btn" (click)="deleteSalary(salary.id)">
+            Delete
+          </button>
         </div>
       </div>
-      <ng-template #noSalaries>
-        <p>No salaries found for this user.</p>
-      </ng-template>
     </div>
-  
-    <!-- Attendances Section -->
-    <div class="attendances-section">
-      <h3>Attendances</h3>
-      <div class="wrapper">
-        <!-- <div class="toolPanel">
+    <ng-template #noSalaries>
+      <p>No salaries found for this user.</p>
+    </ng-template>
+  </div>
+
+  <!-- Attendances Section -->
+  <div class="attendances-section">
+    <h3>Attendances</h3>
+    <div class="wrapper">
+      <!-- <div class="toolPanel">
           <button (click)="missingYValues()">Missing Y Values</button>
           <span class="spacer"></span>
           <button (click)="missingXValue()">Missing X Value</button>
           <span class="spacer"></span>
           <button (click)="reset()">Reset</button>
         </div> -->
-        <ag-charts [options]="options" class="chart"></ag-charts>
-      </div>
-      <div *ngIf="singleuserAllAttendances.length > 0; else noAttendances">
-        <div *ngFor="let attendance of singleuserAllAttendances" class="data-card">
-          <div class="card-header">
-            <h4>Attendance ID: {{ attendance.id }}</h4>
-          </div>
-          <div class="card-body">
-            <p><strong>Date:</strong> {{ attendance.attendanceDate | date:'shortDate' }}</p>
-            <p><strong>Status:</strong> {{ attendance.attendanceStatus }}</p>
-            <p><strong>Check-In Time:</strong> {{ attendance.checkInTime | date:'shortTime' }}</p>
-            <p><strong>Check-Out Time:</strong> {{ attendance.checkOutTime | date:'shortTime' }}</p>
-            <p><strong>Total Hours Worked:</strong> {{ attendance.totalHoursWorked }}</p>
-          </div>
-          <div class="card-footer">
-            <a class="edit-btn" [href]="'/usersAttendances/Attendance/' + attendance.id">Edit</a>
-            <button class="delete-btn" (click)="deleteAttendance(attendance.id)">Delete</button>
-          </div>
+      <ag-charts [options]="options" class="chart"></ag-charts>
+    </div>
+    <div *ngIf="singleuserAllAttendances.length > 0; else noAttendances">
+      <div
+        *ngFor="let attendance of singleuserAllAttendances"
+        class="data-card"
+      >
+        <div class="card-header">
+          <h4>Attendance ID: {{ attendance.id }}</h4>
+        </div>
+        <div class="card-body">
+          <p>
+            <strong>Date:</strong>
+            {{ attendance.attendanceDate | date : "shortDate" }}
+          </p>
+          <p><strong>Status:</strong> {{ attendance.attendanceStatus }}</p>
+          <p>
+            <strong>Check-In Time:</strong>
+            {{ attendance.checkInTime | date : "shortTime" }}
+          </p>
+          <p>
+            <strong>Check-Out Time:</strong>
+            {{
+              attendance.checkOutTime == null
+                ? "pending..."
+                : (attendance.checkOutTime | date : "shortTime")
+            }}
+          </p>
+          <p>
+            <strong>Total Hours Worked:</strong>
+            {{ attendance.totalHoursWorked }}
+          </p>
+        </div>
+        <div class="card-footer">
+          <a
+            class="edit-btn"
+            [href]="'/usersAttendances/Attendance/' + attendance.id"
+            >Edit</a
+          >
+          <button class="delete-btn" (click)="deleteAttendance(attendance.id)">
+            Delete
+          </button>
         </div>
       </div>
-      <ng-template #noAttendances>
-        <p>No attendances found for this user.</p>
-      </ng-template>
     </div>
+    <ng-template #noAttendances>
+      <p>No attendances found for this user.</p>
+    </ng-template>
   </div>
-  
+</div>

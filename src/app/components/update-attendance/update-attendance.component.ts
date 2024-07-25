@@ -35,7 +35,7 @@ export class UpdateAttendanceComponent {
     const attendanceId = this.route.snapshot.paramMap.get('id');
     this.adminService.getUserAttenById(attendanceId).subscribe(
       (data: any) => {
-        console.log(data.attendanceDate, data.checkInTime, data.checkOutTime);
+        //console.log(data.attendanceDate, data.checkInTime, data.checkOutTime);
 
         const datePart = new Date(data.attendanceDate);
         const timeInPart = new Date(data.checkInTime);

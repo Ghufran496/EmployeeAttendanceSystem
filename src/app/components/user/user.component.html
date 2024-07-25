@@ -12,7 +12,7 @@
 </div>
 
 
-<div class="button-container">
+<!-- <div class="button-container">
   <button
     class="clock-button"
     [ngClass]="{ 'clock-in': !isCheckedIn, 'clock-out': isCheckedIn,'hidden': buttonDisabled }"
@@ -46,7 +46,58 @@
       <p><strong>Payment Method:</strong> {{salary.payMethod}}</p>
     </div>
   </div>
+</div> -->
+
+<!-- <div class="container">
+  <button class="toggle-button" (click)="toggleForm()">Show Form</button>
+
+  <div *ngIf="isFormVisible" class="form-container">
+    <form (submit)="onSubmit($event)">
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" [formControl]="message" class="form-control"></textarea>
+      </div>
+      <div class="button-group">
+        <button type="submit" class="submit-button">Submit</button>
+        <button type="button" (click)="clearForm()" class="clear-button">Clear</button>
+      </div>
+    </form>
+  </div>
+</div> -->
+
+<div class="container">
+  <button class="toggle-button" (click)="toggleForm()">
+    {{ isFormVisible ? 'Hide Form' : 'Apply For Leave' }}
+  </button>
+
+  <div *ngIf="isFormVisible" class="form-container">
+    <form (submit)="onSubmit($event)">
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" [formControl]="message" class="form-control" required></textarea>
+      </div>
+      <div class="button-group">
+        <button type="submit" class="submit-button" [disabled]="message.invalid">Submit</button>
+        <button type="button" (click)="clearForm()" class="clear-button">Clear</button>
+      </div>
+    </form>
+  </div>
 </div>
+
+<div class="leavecontainer">
+<div class="leave-cards" *ngIf="authenticatedEmployeeLeaves">
+  <div class="card" *ngFor="let leave of authenticatedEmployeeLeaves">
+    <div class="card-body">
+      <h5 class="card-title">Leave Status: {{ leave.leaveStatus }}</h5>
+      <p class="card-text"><strong>Reason:</strong> {{ leave.reason }}</p>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
 
 
 
