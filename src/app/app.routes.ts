@@ -10,7 +10,8 @@ import { UsersAttendancesComponent } from './components/users-attendances/users-
 import { UpdateSalaryComponent } from './components/update-salary/update-salary.component';
 import { UpdateAttendanceComponent } from './components/update-attendance/update-attendance.component';
 import { SingleUserSalariesComponent } from './components/single-user-salaries/single-user-salaries.component';
-import { SingleUserAttendancesComponent } from './components/single-user-attendances/single-user-attendances.component';
+//import { SingleUserAttendancesComponent } from './components/single-user-attendances/single-user-attendances.component';
+import { UpdateLeaveComponent } from './components/update-leave/update-leave.component';
 
 export const routes: Routes = [
   {
@@ -28,7 +29,7 @@ export const routes: Routes = [
 
   { path: 'admin', component: AdminComponent, canActivate: [authGuard] },
   { path: 'admin/Salary/:id', component: SingleUserSalariesComponent, canActivate: [authGuard] },
-  { path: 'admin/Attendance/:id', component: SingleUserAttendancesComponent, canActivate: [authGuard] },
+  { path: 'admin/Leave/:id', component: UpdateLeaveComponent, canActivate: [authGuard] },
   { path: 'usersSalaries', component: UsersSalariesComponent, canActivate: [authGuard] },
   { path: 'usersSalaries/Salary/:id', component: UpdateSalaryComponent, canActivate: [authGuard] },
   { path: 'usersAttendances', component: UsersAttendancesComponent, canActivate: [authGuard] },

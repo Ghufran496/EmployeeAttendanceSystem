@@ -16,7 +16,6 @@ export class AdminService {
     return this.http.get(url, { headers });
   }
 
-  
   updateUserSalById(salaryId: any, updatedSalary: any) {
     const token = sessionStorage.getItem('tokenjwt'); // Retrieve the token from sessionStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -32,15 +31,13 @@ export class AdminService {
     return this.http.delete(url, { headers });
   }
 
-
-  private AllUsersalaries = 'https://localhost:7262/api/User/Salary/'
+  private AllUsersalaries = 'https://localhost:7262/api/User/Salary/';
   getSingleUserAllSalById(_Id: any) {
     const token = sessionStorage.getItem('tokenjwt'); // Retrieve the token from sessionStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const url = `${this.AllUsersalaries}${_Id}`;
     return this.http.get(url, { headers });
   }
-
 
   private AttenapiUrl = 'https://localhost:7262/api/Attendance/';
 
@@ -66,7 +63,7 @@ export class AdminService {
     return this.http.delete(url, { headers });
   }
 
-  private AllUserAttendences = 'https://localhost:7262/api/User/Attendance/'
+  private AllUserAttendences = 'https://localhost:7262/api/User/Attendance/';
   getSingleUserAllAttendById(_Id: any) {
     const token = sessionStorage.getItem('tokenjwt'); // Retrieve the token from sessionStorage
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -74,4 +71,26 @@ export class AdminService {
     return this.http.get(url, { headers });
   }
 
+  private AllUserLeaves = 'https://localhost:7262/api/Leave/User/';
+  getSingleUserAllLeavesById(_Id: any) {
+    const token = sessionStorage.getItem('tokenjwt'); // Retrieve the token from sessionStorage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const url = `${this.AllUserLeaves}${_Id}`;
+    return this.http.get(url, { headers });
+  }
+
+  private UserLeave = 'https://localhost:7262/api/Leave/';
+  getSingleUserLeaveById(_Id: any) {
+    const token = sessionStorage.getItem('tokenjwt'); // Retrieve the token from sessionStorage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const url = `${this.UserLeave}${_Id}`;
+    return this.http.get(url, { headers });
+  }
+
+  updateUserLeaveById(leaveId: any, updatedLeave: any) {
+    const token = sessionStorage.getItem('tokenjwt'); // Retrieve the token from sessionStorage
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    const url = `${this.UserLeave}${leaveId}`;
+    return this.http.put(url, updatedLeave, { headers });
+  }
 }

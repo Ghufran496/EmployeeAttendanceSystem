@@ -1,0 +1,19 @@
+<div class="container">
+  <h2>Update Leave</h2>
+  <form [formGroup]="updateLeaveForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="leaveStatus">leave Status</label>
+      <input
+        id="leaveStatus"
+        type="text"
+        formControlName="leaveStatus"
+        class="form-control"
+        placeholder="Enter updated leaveStatus"
+      />
+    </div>
+    <div class="button-container">
+      <button type="submit" class="btn btn-success">Update</button>
+      <button type="button" class="btn btn-danger" (click)="onReset()">Reset</button>
+    </div>
+  </form>
+</div>
