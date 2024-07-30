@@ -99,6 +99,7 @@ export const authGuard: CanActivateFn = (
       /^\/usersSalaries\/Salary\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/,
       /^\/usersAttendances$/,
       /^\/usersAttendances\/Attendance\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/,
+      /^\/admin\/Leave\/[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/,
       // /^\/admin\/Attendance\/\d+$/,
       // /^\/usersSalaries$/,
       // /^\/usersSalaries\/Salary\/\d+$/,

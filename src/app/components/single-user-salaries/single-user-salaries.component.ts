@@ -19,6 +19,7 @@ export class SingleUserSalariesComponent {
 
  public singleuserAllSalaries: any = [];
  public singleuserAllAttendances: any = [];
+ public singleuserAllLeaves: any = [];
 
   constructor(private adminService: AdminService,private route: ActivatedRoute) {
     this.options = {
@@ -98,6 +99,7 @@ export class SingleUserSalariesComponent {
     const UserId = this.route.snapshot.paramMap.get('id');
     this.getAllUsersSalaries(UserId);
     this.getAllUsersAttendances(UserId);
+    this.getAllUsersLeaves(UserId);
   }
 
   deleteSalary(id:any) {
@@ -109,6 +111,7 @@ export class SingleUserSalariesComponent {
     this.deleteUserAttendById(id); // Use this.Id.value to get the actual value
    
   }
+
   getAllUsersSalaries(UserId: any) {
     this.adminService.getSingleUserAllSalById(UserId).subscribe(
       (data: any) => {
@@ -127,6 +130,19 @@ export class SingleUserSalariesComponent {
       (data: any) => {
         this.singleuserAllAttendances = data;
         this.updateChartData();
+      },
+      (err) => {
+        console.log('Error fetching users:', err);
+      }
+    );
+  }
+
+  getAllUsersLeaves(UserId: any) {
+    this.adminService.getSingleUserAllLeavesById(UserId).subscribe(
+      (data: any) => {
+        this.singleuserAllLeaves = data;
+        console.log(this.singleuserAllLeaves);
+        
       },
       (err) => {
         console.log('Error fetching users:', err);

@@ -89,4 +89,86 @@
       <p>No attendances found for this user.</p>
     </ng-template>
   </div>
+
+  <!-- Leave Section -->
+  <div
+    class="leaveSection"
+    style="
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      background-color: #f9f9f9;
+    "
+  >
+    <h3 style="text-align: center; font-family: Arial, sans-serif; color: #333">
+      Leaves
+    </h3>
+
+    <div
+      *ngIf="singleuserAllLeaves.length > 0; else noLeaves"
+      style="
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        flex-direction: column;
+      "
+    >
+      <div
+        *ngFor="let leave of singleuserAllLeaves"
+        style="
+          display: flex;
+          gap: 2rem;
+          justify-content: center;
+          align-items: center;
+        "
+      >
+        <p
+          style="
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+          "
+        >
+          <strong>App. No:</strong> {{ leave.allowedLeaves }}
+        </p>
+        <p
+          style="
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+          "
+        >
+          <strong>Leave Status:</strong> {{ leave.leaveStatus }}
+        </p>
+        <p
+          style="
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+          "
+        >
+          <strong>Reason:</strong> {{ leave.reason }}
+        </p>
+        <div
+          style="
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+          "
+        >
+          <a class="edit-btn" [href]="'/admin/Leave/' + leave.id">Modify</a>
+        </div>
+      </div>
+    </div>
+    <ng-template #noLeaves>
+      <p>No Leaves found for this user.</p>
+    </ng-template>
+  </div>
 </div>
